@@ -1,0 +1,54 @@
+
+**************************Project-1*****************************************
+
+1)create an ec2 instance using Amazon-linux image
+2)change the hostname $ hostname Jenkins-Server $ vi /etc/hostname
+3)Install the java $ yum install java-1.8*
+4)goto $ cd /usr/lib/jvm  and do $ ls 
+5) you will see severel java releted files goto java-1.8.0-openjdk
+6) copy the path and set the path in .bash_profile
+ JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
+ PATH=$JAVA_HOME/bin
+7)Insatll the jenkins 
+ Go to browser and say download jenkins for linux and follow the instructions
+ and check the status of jenkins $ service jenkins status $ service jenkins start
+ goto browser copy-ip address:8080
+8)Install the maven 
+ $ cd /opt 
+ goto browser and say dwonload maven for linux and copy link 
+ $ wget 'link-copied'
+ and edit the environment variables in .bash_porfile
+and to get this effect we need to logout and again login
+********************Tomcat-Installation*************************
+
+1) launch the ec2 instance using linux-image
+2) $ cd /opt  
+   goto browser and say download tomcat for linux copy the link
+  $ wget link-address
+3) To run tomcat we need jdk or java 
+ install the java and set the environment variable
+4) goto cd /opt/tomcat/bin
+ start the tomcat $./startup.sh
+5) open the browser $ ip-address:8080
+6) $ /opt/tomcat/webapps/host-manager/META-INF/context.xml
+   $ /opt/tomcat/webapps/manager/META-INF/context.xml
+    edit above two file and comment the valve section <!--     -->
+ whenever u change in the tomcat properties u need to start the tomcat service
+ go to bin directory and $ ./startup.sh
+7) Now u browse the tomcat it will ask the password and username
+$ cd /opt/tomcat/conf/tomcat-user.xml
+
+add the users
+
+<role rolename="manager-gui"/>
+	<role rolename="manager-script"/>
+	<role rolename="manager-jmx"/>
+	<role rolename="manager-status"/>
+	<user username="admin" password="admin" roles="manager-gui, manager-script, manager-jmx, manager-status"/>
+	<user username="deployer" password="deployer" roles="manager-script"/>
+	<user username="tomcat" password="s3cret" roles="manager-gui"/>
+8)Restart the tomcat service
+ $ ./startup.sh
+
+
+
