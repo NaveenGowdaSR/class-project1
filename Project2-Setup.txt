@@ -1,0 +1,34 @@
+******************Project-02****************************
+1)Create an ec2 instance with linux image
+2)install the docker $ yum install docker -y
+3) Create an Dockeradmin user $ useradd dockeradmin $ passwd dockeradmin
+4) add the dockeradmin user to Docker group $ cat /etc/group 
+  $ usermod -aG docker dockeradmin
+5) test the docker installation by running the basic docker commands
+6) configure the docker-server in the jenkins
+ Goto manage jenkins--> Manage plugins , install the 'publish over ssh' plugin
+ Goto manage jenkins-->Configure systems
+ Search for the ssh server add the dockeradmin details and test the configuration
+7) create the maven job and configure the job and build 
+
+8) Dockerfile--- Place in the /home/dockeradmin
+
+FROM tomcat:latest
+
+MAINTAINER Naveen
+
+COPY ./webapp.war /usr/local/tomcat/webapps
+ 
+9)Place the war file in the /home/dockeradmin
+10) Using the dockerfile create an image $ docker build -t name0fimage .
+   Create a container using the above image $ docker run -d --name name0fcontainer -p 8080:8080 nameofimage
+11) Goto browser and say ipaddress:8080/webapp  it will open the application
+
+12)create an new jenkins job copy from last job(deploy-on-docker)
+13) In the ssh configuration exec block write the commands what u want to acheive
+ex:- cd /home/dockeradmin;docker build -t nameofimage;docker run -d --name name0fcontainer -p 8080:8080 nameofimage
+ when you run the job it will automatically create the image and the conntainers 
+
+14)Goto browser and say ipaddress:8080/webapp  it will open the application
+
+ 
